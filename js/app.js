@@ -1,3 +1,7 @@
+//Namn: Josephine Bergenmar//
+//Datum: 2025-10-01//
+//Mejl: josephine.bergenmar@gmail.com//
+
 console.log(
   "hello world"
 );
