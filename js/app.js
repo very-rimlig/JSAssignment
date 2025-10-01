@@ -80,3 +80,8 @@ console.log (numb1/numb2 + " det här är uträkningen");
 //Implement a program that calculates the remainder of dividing two numbers and displays the result//
 let result = numb1 / numb2;
 console.log(result.toFixed(0)); /* siffran 0 ändras till hur mycket du vill runda av, så om 1 hade det blivit 3.8 */
+
+//ett annat sätt att göra samma övning men med remainder operator
+let var1 = 11;
+let var2 = var1 % 4;
+console.log(var2);
