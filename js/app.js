@@ -44,3 +44,13 @@ console.log(numberOfBottles -1);
 console.log(line1);
 
 
+/*
+numberOfBottles -=1;
+console.log(numberOfBottles);
+console.log(numberOfBottles -1);
+console.log(numberOfBottles -1);
+console.log(numberOfBottles -1);
+*/
+
+
+
