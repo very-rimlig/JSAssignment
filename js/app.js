@@ -85,3 +85,10 @@ console.log(result.toFixed(0)); /* siffran 0 ändras till hur mycket du vill run
 let var1 = 11;
 let var2 = var1 % 4;
 console.log(var2);
+
+function myfirstfunction(input){
+  console.log(input);
+}
+let int = 10;
+myfirstfunction(int)
+
