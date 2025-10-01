@@ -43,6 +43,10 @@ console.log(line2);
 console.log(numberOfBottles -1);
 console.log(line1);
 
+/*
+let gold = 10;
+++gold;
+console.log(gold);
 
 /*
 numberOfBottles -=1;
@@ -54,3 +58,25 @@ console.log(numberOfBottles -1);
 
 
 
+//Implement a program that take an input for km/h and display the results in m/s//
+let kmh = 72
+kmh/= 3.6
+console.log(kmh);
+
+//Implement at program that takes a number input for minutes and display the results in secs//
+let min = 3
+min *= 60
+console.log(min);
+
+//Implement a program that takes two numbers as input and display their division results//
+let num1 = 11
+num1 /= 4
+console.log(num1);
+
+let numb1 = 11;
+let numb2 = 4;
+console.log (numb1/numb2 + " det här är uträkningen");
+
+//Implement a program that calculates the remainder of dividing two numbers and displays the result//
+let result = numb1 / numb2;
+console.log(result.toFixed(0)); /* siffran 0 ändras till hur mycket du vill runda av, så om 1 hade det blivit 3.8 */
