@@ -20,3 +20,14 @@ function Welcome(forn, efn) {
   return "Welcome " + forn + efn;
 }
 console.log(Welcome("Ben", " Ting"));
+
+//Write a function that has no parameters and returns a random number from 0 to 2
+function slumptal() {
+  return Math.floor(Math.random() * 3);
+}
+
+console.log(slumptal());
+
+// näststista övningen
+
+//sista övningen
