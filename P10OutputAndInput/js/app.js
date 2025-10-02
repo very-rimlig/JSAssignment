@@ -9,3 +9,8 @@ function multiplyWithIS(numberToMult) {
 }
 console.log(multiplyWithIS(4));
 
+//Här gör jag en funktion som räknar ut medeltalet av två värden
+function average(number1, number2) {
+  return (number1 + number2) / 2;
+}
+console.log(average(2, 6)); // Output: 4
