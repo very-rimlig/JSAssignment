@@ -7,4 +7,15 @@ const currentYear = 2025; //const eftersom vi ska utgå från att inte ändra de
 let age = currentYear - birthYear; //kommentar överflödig
 console.log(age); //testar om uträkning av ålder stämmer
 
+//let isChild 0-10
+// let isTeen 11-17
+// let isAdult 18 or higher
 
+let isChild = age <= 10;
+let isTeen = age >=11 && age <= 17;
+let isAdult = age >= 18;
+
+
+console.log(isChild);
+console.log(isTeen);
+console.log(isAdult);
