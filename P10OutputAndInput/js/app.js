@@ -14,3 +14,9 @@ function average(number1, number2) {
   return (number1 + number2) / 2;
 }
 console.log(average(2, 6)); // Output: 4
+
+//nu prövar jag sista övningen
+function Welcome(forn, efn) {
+  return "Welcome " + forn + efn;
+}
+console.log(Welcome("Ben", " Ting"));
