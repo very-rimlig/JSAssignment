@@ -1,5 +1,5 @@
-const profileName = "Olle Bergenmar Kaddik";
-let profileAge = 8;
+const profileName = "Olle";
+let profileAge = 40;
 let female = false;
 let male = true;
 
@@ -7,8 +7,8 @@ function main(name, age, female, male) {
   greeting(name);
 
   if (checkage(age)) {   // checkage returnerar true/false
-    checkgender(female, male);
     giveRandomBook();
+    checkgender(female, male);
   }
 }
 
@@ -32,15 +32,6 @@ function checkage(age) {
   }
 }
 
-function checkgender(female, male) {
-  if (female) {
-    console.log("Du får köpa månadens kvinnobok 'Man up' för halva priset på Bladbutiken");
-  } else if (male) {
-    console.log("Du får köpa månadens mansbok 'Gråt mer' för halva priset på Bladbutiken");
-  } else {
-    console.log("Du får köpa månadens queer-bok för INGENTING!");
-  }
-}
 
 // Slumpa en bok från listan
 function giveRandomBook() {
@@ -59,7 +50,17 @@ function giveRandomBook() {
   let randomIndex = Math.floor(Math.random() * books.length);
   let chosenBook = books[randomIndex];
 
-  console.log("Du får läsa: " + chosenBook);
+  console.log("Lotteriet ger dig denna bok: " + chosenBook);
 }
+function checkgender(female, male) {
+  if (female) {
+    console.log("PS. Du får köpa månadens kvinnobok 'Man up' för halva priset på Bladbutiken");
+  } else if (male) {
+    console.log("PS. Du får köpa månadens mansbok 'Gråt mer' för halva priset på Bladbutiken");
+  } else {
+    console.log("PS. Du får köpa månadens queer-bok för INGENTING!");
+  }
+}
+
 
 main(profileName, profileAge, female, male);
