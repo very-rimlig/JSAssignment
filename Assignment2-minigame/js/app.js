@@ -1,13 +1,15 @@
-const profileName = "Lena Larsson";
-let profileAge = 32;
-let female = true;
-let male = false;
+const profileName = "Olle Bergenmar Kaddik";
+let profileAge = 8;
+let female = false;
+let male = true;
 
 function main(name, age, female, male) {
   greeting(name);
-  checkage(age);
-  checkgender(female, male);
-  giveRandomBook();
+
+  if (checkage(age)) {   // checkage returnerar true/false
+    checkgender(female, male);
+    giveRandomBook();
+  }
 }
 
 // Hälsning
@@ -19,12 +21,14 @@ function greeting(name) {
 function checkage(age) {
   if (age < 20) {
     console.log("Du är tyvärr för ung för att spela Boklotteriet");
+    return false; // <--- säger till main att INTE fortsätta
   } else {
     console.log("Välkommen in till boklotteriet");
 
     if (age > 30) {
       console.log("Du uppgraderas till superläsare!");
     }
+    return true; // <--- säger till main att fortsätta
   }
 }
 
