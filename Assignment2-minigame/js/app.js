@@ -6,6 +6,7 @@ let male = false;
 function main(name, age, female, male) {
   greeting(name);
   checkage(age);
+  checkgender(female, male);
   giveRandomBook();
 }
 
@@ -27,6 +28,16 @@ function checkage(age) {
   }
 }
 
+function checkgender(female, male) {
+  if (female) {
+    console.log("Du får köpa månadens kvinnobok 'Man up' för halva priset på Bladbutiken");
+  } else if (male) {
+    console.log("Du får köpa månadens mansbok 'Gråt mer' för halva priset på Bladbutiken");
+  } else {
+    console.log("Du får köpa månadens queer-bok för INGENTING!");
+  }
+}
+
 // Slumpa en bok från listan
 function giveRandomBook() {
   const books = [
@@ -41,7 +52,6 @@ function giveRandomBook() {
     "På järnväg genom ett regnigt Närke",
     "Kokboken"
   ];
-
   let randomIndex = Math.floor(Math.random() * books.length);
   let chosenBook = books[randomIndex];
 
