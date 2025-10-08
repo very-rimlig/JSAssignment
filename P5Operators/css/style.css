@@ -10,13 +10,28 @@
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
+html, body {
+  height: 100%; /* viktig för vertikal centering */
+  margin: 0;
+}
 
+body {
+  display: flex; /* flexbox */
+  justify-content: center; /* horisontellt */
+  align-items: center; /* vertikalt */
+  flex-direction: column; /* stapla elementen vertikalt */
+  text-align: center; /* centrerar texten */
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+/*
 html {
   color: #222;
   font-size: 1em;
   line-height: 1.4;
 }
-
+*/
 /*
  * Remove text-shadow in selection highlight:
  * https://twitter.com/miketaylr/status/12228805301
