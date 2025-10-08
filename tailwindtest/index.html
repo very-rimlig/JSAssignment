@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="sv">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tailwind Demo</title>
+  <!-- Tailwind CDN (snabbt för test, annars via npm i projekt) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-screen flex flex-col justify-center items-center bg-gray-100 text-center">
+
+<p id="para1" class="mb-4 text-xl font-semibold">Vågar du trycka på knappen?</p>
+
+<button id="buttonTest" class="bg-blue-500 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-lg transition">
+  Tryck här
+</button>
+
+<p id="message" class="mt-4 text-lg text-gray-700"></p>
+<p id="warning" class="mt-2 text-red-600 font-bold"></p>
+
+<script>
+  const paraGraph = document.getElementById("para1");
+  const button = document.getElementById("buttonTest");
+  const message = document.getElementById("message");
+  const warning = document.getElementById("warning");
+
+  let counter = 0;
+
+  button.addEventListener("click", () => {
+    counter++;
+    paraGraph.textContent = `Nu har du tryckt ${counter} gånger`;
+    message.textContent = "Sluta tryck på knappen!";
+
+    if (counter === 10) {
+      warning.textContent = "⚠️ Om du trycker en gång till slängs du ut!";
+    } else if (counter === 11) {
+      // "Game Over"
+      document.body.classList.remove("bg-gray-100", "text-gray-800");
+      document.body.classList.add("bg-black", "text-red-600", "items-center", "justify-center", "flex");
+      document.body.innerHTML = `
+          <p class="text-4xl mb-4">💀 Jag sa ju att du skulle slängas ut!</p>
+        `;
+    }
+  });
+</script>
+
+<script src="js/app.js"></script>  <!-- Den använder dock inte js-filen eftersom vi sköter allt i indexfilen via tailwindkodning -->
+
+</body>
+
+</html>
