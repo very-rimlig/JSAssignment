@@ -1,33 +1,210 @@
 <!doctype html>
-<html class="no-js" lang="">
-
+<html lang="sv">
+<!-- I den här html-filen ligger all funktion i javascript så den använder ingen extern js-fil --->
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link rel="stylesheet" href="css/style.css">
-  <meta name="description" content="">
-
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-  <meta property="og:image:alt" content="">
-
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icon.png">
-
-  <link rel="manifest" href="site.webmanifest">
-  <meta name="theme-color" content="#fafafa">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Boklotteriet — minspel</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      max-width: 760px;
+      margin: 36px auto;
+      padding: 16px;
+      line-height: 1.5;
+      color: #222;
+    }
+    header { margin-bottom: 18px; }
+    label { display: block; margin: 8px 0 4px; font-weight: 600; }
+    input[type="text"], input[type="number"], select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+    .row { display: flex; gap: 12px; align-items: center; }
+    .row > * { flex: 1; }
+    .controls { margin: 12px 0 18px; display:flex; gap:8px; }
+    button {
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid #333;
+      background: #e6f2ff;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button.secondary { background: #f3f3f3; }
+    #output {
+      background: #fafafa;
+      border: 1px solid #eee;
+      padding: 12px;
+      border-radius: 8px;
+      min-height: 72px;
+      white-space: pre-wrap;
+    }
+    .book {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: #fffbe6;
+      border: 1px dashed #f0c000;
+      font-weight: 700;
+    }
+    footer { margin-top: 18px; font-size: .9rem; color: #666; }
+  </style>
 </head>
-
 <body>
+<header>
+  <h1>Boklotteriet — minspel</h1>
+  <p>Fyll i profil, klicka på <strong>Spela</strong> och se vad lotteriet ger dig.</p>
+</header>
 
-  <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
-  <script src="js/app.js"></script>
+<main>
+  <label for="name">Namn</label>
+  <input id="name" type="text" value="Olle" />
 
+  <label for="age">Ålder</label>
+  <input id="age" type="number" min="0" value="40" />
+
+  <label>Kön</label>
+  <div class="row" aria-label="Kön">
+    <label><input type="radio" name="gender" value="female" /> Kvinna</label>
+    <label><input type="radio" name="gender" value="male" checked /> Man</label>
+    <label><input type="radio" name="gender" value="other" /> Annat / Vill ej uppge</label>
+  </div>
+
+  <div class="controls">
+    <button id="playBtn">Spela</button>
+    <button id="clearBtn" class="secondary">Rensa</button>
+  </div>
+
+  <section>
+    <h2>Resultat</h2>
+    <div id="output" aria-live="polite"></div>
+  </section>
+</main>
+
+<footer>
+  <small>Skapat som ett litet övningsspel — inga riktiga köp erbjuds 😊</small>
+</footer>
+
+<script>
+  // --- Variabler / DOM ---
+  const nameInput = document.getElementById("name");
+  const ageInput = document.getElementById("age");
+  const playBtn = document.getElementById("playBtn");
+  const clearBtn = document.getElementById("clearBtn");
+  const output = document.getElementById("output");
+
+  // Boklista (samma som du hade)
+  const books = [
+    "Sagan om Sune",
+    "Bajsboken",
+    "Kvinnorummet",
+    "Lagboken",
+    "Röda rummet",
+    "Familjen",
+    "Lär dig koda eller göm dig",
+    "Regler är till för att brytas",
+    "På järnväg genom ett regnigt Närke",
+    "Kokboken"
+  ];
+
+  // Hjälpfunktion för att skriva ut till sidan (istället för console.log)
+  function show(msg, append = true) {
+    if (!append) output.textContent = "";
+    // Lägg till med radbrytning
+    output.textContent = output.textContent + msg + "\n";
+  }
+
+  // --- Din ursprungliga logik, men uppdaterad för att använda show() ---
+  function main(name, age, female, male) {
+    // Rensa output för ny körning
+    output.textContent = "";
+
+    greeting(name);
+
+    if (checkage(age)) {   // checkage returnerar true/false
+      giveRandomBook();
+      checkgender(female, male);
+    }
+  }
+
+  // Hälsning
+  function greeting(name) {
+    show("Hej " + name);
+  }
+
+  // Ålderskontroll + specialmeddelande
+  function checkage(age) {
+    if (age < 20) {
+      show("Du är tyvärr för ung för att spela Boklotteriet");
+      return false; // <--- säger till main att INTE fortsätta
+    } else {
+      show("Välkommen in till boklotteriet");
+
+      if (age > 30) {
+        show("Du uppgraderas till superläsare!");
+      }
+      return true; // <--- säger till main att fortsätta
+    }
+  }
+
+  // Slumpa en bok från listan
+  function giveRandomBook() {
+    let randomIndex = Math.floor(Math.random() * books.length);
+    let chosenBook = books[randomIndex];
+
+    // Visa extra tydligt
+    show("\nLotteriet ger dig denna bok:");
+    // skapa ett visuellt element i output för att lyfta fram boken
+    const bookBadge = document.createElement("div");
+    bookBadge.className = "book";
+    bookBadge.textContent = chosenBook;
+
+    // lägg in badge i output (eftersom show() jobbar med textContent, behöver vi appendChild)
+    output.appendChild(bookBadge);
+    show("", true); // lägga till radbrytning efter badgen
+  }
+
+  function checkgender(female, male) {
+    if (female) {
+      show("PS. Du får köpa månadens kvinnobok 'Man up' för halva priset på Bladbutiken");
+    } else if (male) {
+      show("PS. Du får köpa månadens mansbok 'Gråt mer' för halva priset på Bladbutiken");
+    } else {
+      show("PS. Du får köpa månadens queer-bok för INGENTING!");
+    }
+  }
+
+  // --- Koppla UI till funktionerna ---
+  playBtn.addEventListener("click", () => {
+    const name = nameInput.value.trim() || "Spelare";
+    const age = Number(ageInput.value);
+    const genderValue = document.querySelector('input[name="gender"]:checked')?.value || "other";
+
+    // Konvertera till booleans som din main förväntar sig
+    const female = genderValue === "female";
+    const male = genderValue === "male";
+
+    // Validera ålder-inmatning
+    if (Number.isNaN(age) || age < 0) {
+      output.textContent = "";
+      show("Skriv in en giltig ålder (0 eller högre).", false);
+      return;
+    }
+
+    main(name, age, female, male);
+  });
+
+  clearBtn.addEventListener("click", () => {
+    output.textContent = "";
+  });
+
+  // Valfritt: köra en demo vid sidladdning (kommentera bort om du inte vill detta)
+  // main("Olle", 40, false, true);
+</script>
 </body>
-
 </html>
